@@ -29,7 +29,10 @@ fn main() {
     //println!("{}", r);
 
     let c = Cube111::new();
-
-
+    println!("{:?}", c);
+    let c2 = c.clone().x();
+    println!("{:?}", c2);
+    let c3 = c.clone().mx();
+    println!("{:?}", c3);
 
 }

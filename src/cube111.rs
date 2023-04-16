@@ -6,7 +6,7 @@ use crate::colors::{Color as C, Conversions};
 
 
 
-
+#[derive(Debug, Clone)]
 pub struct Cube111
 {
     vals: Vector6<C>
@@ -30,6 +30,12 @@ impl Cube111
     }
     pub fn mx(self) -> Self
     {
-        todo!()
+        let t = Matrix6::<i32>::new( 0, 0, 0, 1, 0, 0,
+                                     1, 0, 0, 0, 0, 0,
+                                     0, 0, 1, 0, 0, 0,
+                                     0, 0, 0, 0, 0, 1,
+                                     0, 0, 0, 0, 1, 0,
+                                     0, 1, 0, 0, 0, 0, );
+        Cube111 { vals: (t * self.vals.to_numerical()).to_colorical() }
     }
 }

@@ -7,7 +7,7 @@ use nalgebra::Vector;
 use num_derive::FromPrimitive;
 
 
-#[derive(Clone, Copy, FromPrimitive)]
+#[derive(Clone, Copy, FromPrimitive, Debug)]
 pub enum Color
 {
     W,

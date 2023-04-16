@@ -7,3 +7,6 @@ edition = "2021"
 
 [dependencies]
 nalgebra = "0.32.2"
+num = "0.4"
+num-derive = "0.3"
+num-traits = "0.2"

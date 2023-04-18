@@ -26,6 +26,10 @@ impl Cube111
                                      1, 0, 0, 0, 0, 0,
                                      0, 0, 0, 0, 1, 0,
                                      0, 0, 0, 1, 0, 0, );
+        let s1 = t * self.vals.to_numerical();
+        println!("{}", s1);
+        let s2 = s1.to_colorical();
+        println!("{:?}", s2);
         Cube111 { vals: (t * self.vals.to_numerical()).to_colorical() }
     }
     pub fn mx(self) -> Self

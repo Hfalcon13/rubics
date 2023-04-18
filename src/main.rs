@@ -27,12 +27,17 @@ fn main() {
     //println!("{}", t);
     //!("{}", c);
     //println!("{}", r);
+    assert!(Cube111::new().x().mx() == Cube111::new());
+    assert!(Cube111::new().x().x().x().x() == Cube111::new());
+    assert!(Cube111::new().x().x() == Cube111::new().mx().mx());
+    
+
 
     let c = Cube111::new();
-    println!("{:?}", c);
+    println!("main c {:?}", c);
     let c2 = c.clone().x();
-    println!("{:?}", c2);
+    println!("main c.x {:?}", c2);
     let c3 = c.clone().mx();
-    println!("{:?}", c3);
+    println!("main c.mx {:?}", c3);
 
 }

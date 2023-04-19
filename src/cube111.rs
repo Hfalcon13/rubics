@@ -62,4 +62,24 @@ impl Cube111
                                      0, 0, 0, 0, 0, 1, );
         Cube111 { vals: (t * self.vals.to_numerical()).to_colorical() }
     }
+    pub fn z(self) -> Self
+    {
+        let t = Matrix6::<i32>::new( 0, 0, 0, 0, 1, 0,
+                                     0, 1, 0, 0, 0, 0,
+                                     1, 0, 0, 0, 0, 0,
+                                     0, 0, 0, 1, 0, 0,
+                                     0, 0, 0, 0, 0, 1,
+                                     0, 0, 1, 0, 0, 0, );
+        Cube111 { vals: (t * self.vals.to_numerical()).to_colorical() }
+    }
+    pub fn mz(self) -> Self
+    {
+        let t = Matrix6::<i32>::new( 0, 0, 1, 0, 0, 0,
+                                     0, 1, 0, 0, 0, 0,
+                                     0, 0, 0, 0, 0, 1,
+                                     0, 0, 0, 1, 0, 0,
+                                     1, 0, 0, 0, 0, 0,
+                                     0, 0, 0, 0, 1, 0, );
+        Cube111 { vals: (t * self.vals.to_numerical()).to_colorical() }
+    }
 }

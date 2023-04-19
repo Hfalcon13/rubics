@@ -30,7 +30,14 @@ fn main() {
     assert!(Cube111::new().x().mx() == Cube111::new());
     assert!(Cube111::new().x().x().x().x() == Cube111::new());
     assert!(Cube111::new().x().x() == Cube111::new().mx().mx());
-    
+    assert_eq!(Cube111::new().x().y().z(), Cube111::new().x().x().y());
+    assert_eq!(Cube111::new(), Cube111::new()
+    .x().x().x().x()
+    .mx().mx().mx().mx()
+    .y().y().y().y()
+    .my().my().my().my()
+    .z().z().z().z()
+    .mz().mz().mz().mz());
 
 
     let c = Cube111::new();

@@ -11,6 +11,8 @@ mod cube111;
 
 use cube111::{Cube111};
 
+mod m_gen;
+
 fn main() {
     // let t = Matrix6::<i32>::new(0, 1, 0, 0, 0, 0,
     //                             0, 0, 0, 0, 0, 1,
@@ -44,8 +46,9 @@ fn main() {
     println!("main c1 {:?}", c1);
     
     let c2 = Cube111::new()
-    .x().y().z().mx().my().mz();
+    .x().z().z().my().mz().mx().y().mz();
     println!("main c2 {:?}", c2);
+
 
 
 

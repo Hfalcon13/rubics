@@ -43,7 +43,8 @@ fn main() {
     let c1 = Cube111::new();
     println!("main c1 {:?}", c1);
     
-    let c2 = Cube111::new();
+    let c2 = Cube111::new()
+    .x().y().z().mx().my().mz();
     println!("main c2 {:?}", c2);
 
 

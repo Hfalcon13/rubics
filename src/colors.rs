@@ -1,8 +1,8 @@
 
 
-use core::ops::Mul;
+//use core::ops::Mul;
 
-use na::{Matrix, Const, ArrayStorage, U6, U1};
+use na::{Matrix, /*Const,*/ ArrayStorage, U6, U1};
 use nalgebra::Vector;
 use num_derive::FromPrimitive;
 

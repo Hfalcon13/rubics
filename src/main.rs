@@ -1,11 +1,11 @@
 
 extern crate nalgebra as na;
 
-use na::{Vector6, Matrix6};
+//use na::{Vector6, Matrix6};
 
 mod colors;
 
-use colors::{Color as C, Conversions};
+//use colors::{Color as C, Conversions};
 
 mod cube111;
 
@@ -40,11 +40,12 @@ fn main() {
     .mz().mz().mz().mz());
 
 
-    let c = Cube111::new();
-    println!("main c {:?}", c);
-    let c2 = c.clone().x();
-    println!("main c.x {:?}", c2);
-    let c3 = c.clone().mx();
-    println!("main c.mx {:?}", c3);
+    let c1 = Cube111::new();
+    println!("main c1 {:?}", c1);
+    
+    let c2 = Cube111::new();
+    println!("main c2 {:?}", c2);
+
+
 
 }

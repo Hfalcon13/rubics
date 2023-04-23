@@ -54,7 +54,17 @@ pub mod tests
     #[test]
     pub fn m_gen_test()
     {
-        //let _ = m_gen::addv();
+        
+        let v11: DVector<i32> = na::DVector::from_vec(vec![0,1,2,3,4,5]);
+        let v12: DVector<i32> = na::DVector::from_vec(vec![1,5,2,0,4,3]);
+        let t1 = m_gen::mgen(&v11, &v12);
+        println!("{}", t1);
+        assert_eq!(t1, na::Matrix6::<i32>::new( 0, 1, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 1,
+            0, 0, 1, 0, 0, 0,
+            1, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 1, 0,
+            0, 0, 0, 1, 0, 0, ))
     }
 
 }

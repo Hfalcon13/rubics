@@ -1,7 +1,7 @@
 
 extern crate nalgebra as na;
 
-use na::{DVector};
+use na::{DMatrix, DVector};
 
 mod colors;
 
@@ -35,6 +35,8 @@ pub mod tests
 {
     use super::*;
 
+    use crate::m_gen::mgen;
+
     #[test]
     pub fn cube111_test()
     {
@@ -52,12 +54,12 @@ pub mod tests
     }
 
     #[test]
-    pub fn m_gen_test()
+    pub fn m_gen_costom_test()
     {
         
         let v11: DVector<i32> = na::DVector::from_vec(vec![0,1,2,3,4,5]);
         let v12: DVector<i32> = na::DVector::from_vec(vec![1,5,2,0,4,3]);
-        let t1 = m_gen::mgen(&v11, &v12);
+        let t1 = mgen(&v11, &v12);
         println!("{}", t1);
         assert_eq!(t1, na::Matrix6::<i32>::new( 0, 1, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 1,
@@ -67,6 +69,36 @@ pub mod tests
             0, 0, 0, 1, 0, 0, ))
     }
 
+    #[test]
+    fn test_mgen() {
+        let a = DVector::from_vec(vec![0, 1, 2, 3, 4]);
+        let b = DVector::from_vec(vec![1, 0, 2, 4, 3]);
+        let expected_result = DMatrix::from_vec(5, 5, vec![
+            0, 1, 0, 0, 0,
+            1, 0, 0, 0, 0,
+            0, 0, 1, 0, 0,
+            0, 0, 0, 0, 1,
+            0, 0, 0, 1, 0,
+        ]);
+        let result = mgen(&a, &b);
+        assert_eq!(result, expected_result);
+    }
+
+    #[test]
+    #[should_panic(expected = "assertion failed: a.len() == b.len()")]
+    fn test_mgen_different_sizes() {
+        let a = DVector::from_vec(vec![0, 1, 2]);
+        let b = DVector::from_vec(vec![1, 0, 2, 4, 3]);
+        let _result = mgen(&a, &b);
+    }
+
+    #[test]
+    #[should_panic(expected = "assertion failed: a[i] == j")]
+    fn test_mgen_invalid_permutation() {
+        let a = DVector::from_vec(vec![0, 1, 2, 3, 4]);
+        let b = DVector::from_vec(vec![1, 0, 2, 4, 4]);
+        let _result = mgen(&a, &b);
+    }
 }
 
 

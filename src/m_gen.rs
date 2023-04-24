@@ -25,18 +25,20 @@ where
 
 pub fn mgen(a: &DVector<i32>, b: &DVector<i32>) -> DMatrix<i32>
 {
+    //the before and after vectros have to be the same size
     assert_eq!(a.len(), b.len());
+    //this is the result N by N-transformation-binary-permutation matrix
     let mut result: DMatrix<i32> = DMatrix::zeros(a.len(), a.len());
+    //goes thought the matrix rows and updates them
     for i in 0..a.len()
     {
-        println!("mgen {} {} {}", i, b[i], index_of(a, b[i]));
         result
         .set_row(i, 
             &my_apply(&DVector::<i32>::zeros(a.len()), 
             |_,j|if j == index_of(a, b[i]){1}else{0})
         .transpose());
     }
-    
+    //returns
     result
 }
 

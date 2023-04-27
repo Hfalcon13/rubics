@@ -1,7 +1,7 @@
 
 extern crate nalgebra as na;
 
-use na::{DMatrix, DVector};
+use na::{DMatrix, DVector, Vector, U24, U1, ArrayStorage};
 
 mod colors;
 
@@ -13,21 +13,23 @@ use cube111::{Cube111};
 
 mod m_gen;
 
+use m_gen::mgen;
+
 fn main() {
 
-    
-
-
-    let c1 = Cube111::new();
-    println!("main c1 {:?}", c1);
-    
-    let c2 = Cube111::new()
-    .x().z().z().my().mz().mx().y().mz();
-    println!("main c2 {:?}", c2);
+    //insted of reprezenting a color by a number, you need to use a RANGE of numbers per color
 
 
 
+    let v1: DVector<i32> = DVector::from_vec(vec![0,0,0,0,1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5]);
+    println!("{}", v1);
+    let v2: DVector<i32> = DVector::from_vec(vec![0,1,0,1,1,5,1,5,2,2,2,2,0,3,0,3,4,4,4,4,5,3,5,3]);
+    println!("{}", v2);
 
+    let t = mgen(&v1, &v2);
+    let v3 = t * &v1;
+    println!("{}", v3);
+    println!("{}", &v1 == &v3);
 }
 
 #[cfg(test)]

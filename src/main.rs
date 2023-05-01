@@ -17,19 +17,30 @@ use m_gen::mgen;
 
 fn main() {
 
+
+
+    let mut c = Cube111::scrambled();
+
+    println!("{:?}", c);
+
+    c.solve();
+
+    println!("{:?}", c);
+
+
     //insted of reprezenting a color by a number, you need to use a RANGE of numbers per color
 
 
 
-    let v1: DVector<i32> = DVector::from_vec(vec![0,0,0,0,1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5]);
-    println!("{}", v1);
-    let v2: DVector<i32> = DVector::from_vec(vec![0,1,0,1,1,5,1,5,2,2,2,2,0,3,0,3,4,4,4,4,5,3,5,3]);
-    println!("{}", v2);
+    // let v1: DVector<i32> = DVector::from_vec(vec![0,0,0,0,1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5]);
+    // println!("{}", v1);
+    // let v2: DVector<i32> = DVector::from_vec(vec![0,1,0,1,1,5,1,5,2,2,2,2,0,3,0,3,4,4,4,4,5,3,5,3]);
+    // println!("{}", v2);
 
-    let t = mgen(&v1, &v2);
-    let v3 = t * &v1;
-    println!("{}", v3);
-    println!("{}", &v1 == &v3);
+    // let t = mgen(&v1, &v2);
+    // let v3 = t * &v1;
+    // println!("{}", v3);
+    // println!("{}", &v1 == &v3);
 }
 
 #[cfg(test)]
@@ -38,6 +49,8 @@ pub mod tests
     use super::*;
 
     use crate::m_gen::mgen;
+
+    
 
     #[test]
     pub fn cube111_test()
@@ -100,6 +113,45 @@ pub mod tests
         let a = DVector::from_vec(vec![0, 1, 2, 3, 4]);
         let b = DVector::from_vec(vec![1, 0, 2, 4, 4]);
         let _result = mgen(&a, &b);
+    }
+    #[test]
+    fn test_get_fun_by_num() {
+        let c = Cube111::new();
+        let c_x = c.x();
+        let c_mx = c.mx();
+        let c_y = c.y();
+        let c_my = c.my();
+        let c_z = c.z();
+        let c_mz = c.mz();
+
+        assert_eq!(Cube111::getFunByNum(0)(&c), c_x);
+        assert_eq!(Cube111::getFunByNum(1)(&c), c_mx);
+        assert_eq!(Cube111::getFunByNum(2)(&c), c_y);
+        assert_eq!(Cube111::getFunByNum(3)(&c), c_my);
+        assert_eq!(Cube111::getFunByNum(4)(&c), c_z);
+        assert_eq!(Cube111::getFunByNum(5)(&c), c_mz);
+    }
+
+    #[test]
+    fn test_scrambled() {
+        let c = Cube111::scrambled();
+        assert_ne!(c, Cube111::new());
+    }
+
+    #[test]
+    fn test_is_solved() {
+        let c = Cube111::new();
+        assert!(c.isSolved());
+
+        let c_x = c.x();
+        assert!(!c_x.isSolved());
+    }
+
+    #[test]
+    fn test_solve() {
+        let mut c = Cube111::scrambled();
+        c.solve();
+        assert!(c.isSolved());
     }
 }
 

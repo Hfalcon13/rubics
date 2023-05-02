@@ -23,7 +23,7 @@ fn main() {
 
     println!("{:?}", c);
 
-    c.solve();
+    c.solve_depth(8);
 
     println!("{:?}", c);
 

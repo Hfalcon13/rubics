@@ -121,15 +121,39 @@ impl Cube111
         *self == Cube111::new()
     }
 
+    //goal: make this go a variable amount of depth
+    //instead of just 1
     pub fn solve(&mut self)
     {
-        //goal: make this go a variable amount of depth
-        //instead of just 1
         for i in 0..6
         {
             if Cube111::getFunByNum(i)(&self).isSolved()
             {
                 *self = Cube111::getFunByNum(i)(&self);
+            }
+        }
+    }
+    pub fn solve_depth(&mut self, depth: u8)
+    {
+        //println!("to fix {:?}", self);
+        assert!(depth > 0);
+
+        if depth == 1
+        {
+            for i in 0..6
+            {
+                if Cube111::getFunByNum(i)(&self).isSolved()
+                {
+                    *self = Cube111::getFunByNum(i)(&self);
+                    return;
+                }
+            }
+        }
+        else
+        {
+            for i in 0..6
+            {
+                Cube111::getFunByNum(i)(&self).solve_depth(depth - 1);
             }
         }
     }

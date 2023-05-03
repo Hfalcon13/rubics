@@ -17,13 +17,15 @@ use m_gen::mgen;
 
 fn main() {
 
+    println!("{:?}", Cube111::new());
 
-
-    let mut c = Cube111::scrambled();
+    let mut c = Cube111::new().x();
 
     println!("{:?}", c);
 
-    c.solve_depth(8);
+    let a = c.solve_depth(4);
+    
+    println!("{}", a);
 
     println!("{:?}", c);
 

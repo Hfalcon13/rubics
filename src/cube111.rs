@@ -6,10 +6,17 @@ use crate::colors::{Color as C, Conversions};
 
 
 
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone)]
 pub struct Cube111
 {
     vals: Vector6<C>
+}
+
+impl PartialEq for Cube111
+{
+    fn eq(&self, other: &Self) -> bool {
+        self.vals == other.vals
+    }
 }
 
 impl Cube111
@@ -133,19 +140,23 @@ impl Cube111
             }
         }
     }
-    pub fn solve_depth(&mut self, depth: u8)
+    pub fn solve_depth(&mut self, depth: u8) -> u128
     {
         //println!("to fix {:?}", self);
         assert!(depth > 0);
 
+        let mut acc = 0;
+
         if depth == 1
         {
+            //println!("got here");
             for i in 0..6
             {
-                if Cube111::getFunByNum(i)(&self).isSolved()
+                if (Cube111::getFunByNum(i)(&self)).isSolved()
                 {
                     *self = Cube111::getFunByNum(i)(&self);
-                    return;
+                    println!("sd  ->  {:?}", Cube111::getFunByNum(i)(&self));
+                    return 1;
                 }
             }
         }
@@ -153,8 +164,9 @@ impl Cube111
         {
             for i in 0..6
             {
-                Cube111::getFunByNum(i)(&self).solve_depth(depth - 1);
+                acc += (Cube111::getFunByNum(i)(&self)).solve_depth(depth - 1);
             }
         }
+        return acc;
     }
 }

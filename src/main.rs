@@ -1,7 +1,7 @@
 
 extern crate nalgebra as na;
 
-use na::{DMatrix, DVector, Vector, U24, U1, ArrayStorage};
+//use na::{DMatrix, DVector, Vector, U24, U1, ArrayStorage};
 
 mod colors;
 
@@ -9,11 +9,11 @@ mod colors;
 
 mod cube111;
 
-use cube111::{Cube111};
+use cube111::Cube111;
 
 mod m_gen;
 
-use m_gen::mgen;
+//use m_gen::mgen;
 
 fn main() {
 
@@ -52,7 +52,7 @@ pub mod tests
 
     use crate::m_gen::mgen;
 
-    
+    use na::{DVector, DMatrix};
 
     #[test]
     pub fn cube111_test()

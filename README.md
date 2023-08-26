@@ -7,4 +7,4 @@ by using a
 *MATRIX!* 
 to represent a change to the cube.
 
-[what is a matrix?]([https://www.example.com](https://en.wikipedia.org/wiki/Matrix_(mathematics))https://en.wikipedia.org/wiki/Matrix_(mathematics))
+[what is a matrix?](https://en.wikipedia.org/wiki/Matrix_(mathematics))

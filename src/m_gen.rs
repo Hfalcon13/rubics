@@ -1,7 +1,7 @@
 
 
 
-use na::{ArrayStorage, DMatrix, DVector, Dim, DimName, Vector1, Matrix, Const};
+use na::{DMatrix, DVector};
 //use num_derive::FromPrimitive;
 
 fn index_of(v: &DVector<i32>, e: i32) -> usize
@@ -38,6 +38,8 @@ fn contains_only_unque<T: PartialEq + Copy>(v: &DVector<T>) -> bool
     true
 }
 
+//given before (a) and after (b) vector representing cubes
+//returns a matrix (m) so that, m*a=b
 pub fn mgen(a: &DVector<i32>, b: &DVector<i32>) -> DMatrix<i32>
 {
     //the before and after vectros have to be the same size

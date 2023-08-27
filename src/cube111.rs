@@ -128,45 +128,106 @@ impl Cube111
         *self == Cube111::new()
     }
 
+}
+
+#[derive(Debug, PartialEq, Eq, Clone, Copy)]
+pub enum Cube111Ops
+{
+    x = 0,
+    mx = 1,
+    y = 2,
+    my = 3,
+    z = 4,
+    mz = 5
+}
+impl Into<Cube111Ops> for u8
+{
+    fn into(self) -> Cube111Ops {
+        match self {
+            0 => Cube111Ops::x,
+            1 => Cube111Ops::mx,
+            2 => Cube111Ops::y,
+            3 => Cube111Ops::my,
+            4 => Cube111Ops::z,
+            5 => Cube111Ops::mz,
+            _ => panic!("invalid number")
+        }
+    }
+}
+
+
+impl Cube111
+{  
+
     //goal: make this go a variable amount of depth
     //instead of just 1
-    pub fn solve(&mut self)
+    pub fn solve(&self) -> Option<Vec<Cube111Ops>>
     {
         for i in 0..6
         {
             if Cube111::getFunByNum(i)(&self).isSolved()
             {
-                *self = Cube111::getFunByNum(i)(&self);
+                return Some(vec![i.into()]);
             }
         }
+        
+
+        return None;
     }
-    pub fn solve_depth(&mut self, depth: u8) -> u128
+
+    
+
+    pub fn solve_depth(&self, path: Vec<Cube111Ops>) -> Vec<Cube111Ops>
     {
-        //println!("to fix {:?}", self);
-        assert!(depth > 0);
+        // let mut acc = 0;
 
-        let mut acc = 0;
+        // if depth == 1
+        // {
+        //     //println!("got here");
+        //     for i in 0..6
+        //     {
+        //         if (Cube111::getFunByNum(i)(&self)).isSolved()
+        //         {
+        //             *self = Cube111::getFunByNum(i)(&self);
+        //             println!("sd  ->  {:?}", Cube111::getFunByNum(i)(&self));
+        //             return 1;
+        //         }
+        //     }
+        // }
+        // else
+        // {
+        //     for i in 0..6
+        //     {
+        //         acc += (Cube111::getFunByNum(i)(&self)).solve_depth(depth - 1);
+        //     }
+        // }
+        // return acc;
 
-        if depth == 1
-        {
-            //println!("got here");
-            for i in 0..6
-            {
-                if (Cube111::getFunByNum(i)(&self)).isSolved()
-                {
-                    *self = Cube111::getFunByNum(i)(&self);
-                    println!("sd  ->  {:?}", Cube111::getFunByNum(i)(&self));
-                    return 1;
-                }
-            }
-        }
-        else
-        {
-            for i in 0..6
-            {
-                acc += (Cube111::getFunByNum(i)(&self)).solve_depth(depth - 1);
-            }
-        }
-        return acc;
+         if let Some(x) = self.solve()
+         {
+            return x;
+         }
+         else {
+            (0..6).into_iter().map(|&x| )
+         }
+
+
+
+
+
+
     }
+}
+
+
+macro_rules! solve_depth
+{
+    ($a: expr, $b: expr) =>
+    {
+        solve_depth(a, b)
+    };
+    ($a: expr) =>
+    {
+        solve_depth(a, vec![])
+    };
 }

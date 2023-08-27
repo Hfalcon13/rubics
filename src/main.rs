@@ -1,4 +1,3 @@
-
 extern crate nalgebra as na;
 
 //use na::{DMatrix, DVector, Vector, U24, U1, ArrayStorage};
@@ -15,8 +14,9 @@ mod m_gen;
 
 //use m_gen::mgen;
 
-fn main() {
+mod cube333;
 
+fn main() {
     println!("{:?}", Cube111::new());
 
     let mut c = Cube111::new().x();
@@ -24,15 +24,12 @@ fn main() {
     println!("{:?}", c);
 
     let a = c.solve_depth(4);
-    
+
     println!("{}", a);
 
     println!("{:?}", c);
 
-
     //insted of reprezenting a color by a number, you need to use a RANGE of numbers per color
-
-
 
     // let v1: DVector<i32> = DVector::from_vec(vec![0,0,0,0,1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5]);
     // println!("{}", v1);
@@ -46,57 +43,75 @@ fn main() {
 }
 
 #[cfg(test)]
-pub mod tests
-{
+pub mod tests {
     use super::*;
 
     use crate::m_gen::mgen;
 
-    use na::{DVector, DMatrix};
+    use na::{DMatrix, DVector};
 
     #[test]
-    pub fn cube111_test()
-    {
+    pub fn cube111_test() {
         assert!(Cube111::new().x().mx() == Cube111::new());
         assert!(Cube111::new().x().x().x().x() == Cube111::new());
         assert!(Cube111::new().x().x() == Cube111::new().mx().mx());
         assert_eq!(Cube111::new().x().y().z(), Cube111::new().x().x().y());
-        assert_eq!(Cube111::new(), Cube111::new()
-        .x().x().x().x()
-        .mx().mx().mx().mx()
-        .y().y().y().y()
-        .my().my().my().my()
-        .z().z().z().z()
-        .mz().mz().mz().mz());
+        assert_eq!(
+            Cube111::new(),
+            Cube111::new()
+                .x()
+                .x()
+                .x()
+                .x()
+                .mx()
+                .mx()
+                .mx()
+                .mx()
+                .y()
+                .y()
+                .y()
+                .y()
+                .my()
+                .my()
+                .my()
+                .my()
+                .z()
+                .z()
+                .z()
+                .z()
+                .mz()
+                .mz()
+                .mz()
+                .mz()
+        );
     }
 
     #[test]
-    pub fn m_gen_costom_test()
-    {
-        
-        let v11: DVector<i32> = na::DVector::from_vec(vec![0,1,2,3,4,5]);
-        let v12: DVector<i32> = na::DVector::from_vec(vec![1,5,2,0,4,3]);
+    pub fn m_gen_costom_test() {
+        let v11: DVector<i32> = na::DVector::from_vec(vec![0, 1, 2, 3, 4, 5]);
+        let v12: DVector<i32> = na::DVector::from_vec(vec![1, 5, 2, 0, 4, 3]);
         let t1 = mgen(&v11, &v12);
         println!("{}", t1);
-        assert_eq!(t1, na::Matrix6::<i32>::new( 0, 1, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 1,
-            0, 0, 1, 0, 0, 0,
-            1, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 1, 0,
-            0, 0, 0, 1, 0, 0, ))
+        assert_eq!(
+            t1,
+            na::Matrix6::<i32>::new(
+                0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                1, 0, 0, 0, 0, 1, 0, 0,
+            )
+        )
     }
 
     #[test]
     fn test_mgen() {
         let a = DVector::from_vec(vec![0, 1, 2, 3, 4]);
         let b = DVector::from_vec(vec![1, 0, 2, 4, 3]);
-        let expected_result = DMatrix::from_vec(5, 5, vec![
-            0, 1, 0, 0, 0,
-            1, 0, 0, 0, 0,
-            0, 0, 1, 0, 0,
-            0, 0, 0, 0, 1,
-            0, 0, 0, 1, 0,
-        ]);
+        let expected_result = DMatrix::from_vec(
+            5,
+            5,
+            vec![
+                0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0,
+            ],
+        );
         let result = mgen(&a, &b);
         assert_eq!(result, expected_result);
     }
@@ -156,6 +171,3 @@ pub mod tests
         assert!(c.isSolved());
     }
 }
-
-
-
